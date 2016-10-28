@@ -1,0 +1,11 @@
+#!/bin/bash
+#apply ocropus to every .tiff in the directory
+
+#creates "ocropus" directory if doesn't exist
+if [ ! -d ocropus ]; then
+  mkdir -p ocropus;
+fi
+
+for i in *.tiff; do
+	ocropus $i 'ocropus/'${i%.tiff}'.ocropus' #calls ocropus (takes .tiff out from output's name)
+done;

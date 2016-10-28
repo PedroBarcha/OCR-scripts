@@ -1,0 +1,7 @@
+#!/bin/bash
+#apply ocrevalUAtion to folder or files
+
+ground_truth=$1
+ocr=$2
+
+java -cp /home/banshee/ocrevalUAtion-master/target/ocrevaluation.jar eu.digitisation.Main -gt $ground_truth -ocr $ocr

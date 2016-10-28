@@ -1,0 +1,11 @@
+#!/bin/bash
+#apply tesseract to every .tiff in the directory
+
+#creates "tesseract" directory if doesn't exist
+if [ ! -d tesseract ]; then
+  mkdir -p tesseract;
+fi
+
+for i in *.tiff; do
+	tesseract $i 'tesseract/'${i%.tiff}'.tess' #calls tesseract (takes .tiff out from output's name)
+done;
