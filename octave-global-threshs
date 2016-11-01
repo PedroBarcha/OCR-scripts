@@ -1,0 +1,40 @@
+#! octave-workspace -qf
+%octave script that applies several thresholding methods from graythresh function
+%(from octave-forge's image pack) to every 300dpi image of the database
+
+close all
+clear all
+clc
+pkg load image
+
+%the following are the thresholding methods that are going to be applied
+methods={'concavity';'intermeans';'intermodes'; 'MaxLikelihood'; 'MaxEntropy';'MinError';'minimum';'moments'};
+
+outputPath = '/home/banshee/Pictures/OCR-images/Database/thresholding/octave-global-thresholdings/';
+imgPath = '/home/banshee/Pictures/OCR-images/Database/300dpi/tiff/';
+imgType = '*.tiff'; % change based on image type
+images  = dir([imgPath imgType]); %images=array containing all the info of .tiffs in the dir
+
+for idx = 1:length(images) %for every image...
+	img = imread([imgPath images(idx).name]);
+	for i = 1:8 %...apply every method
+		printf("1\n");
+		method = char(methods(i));
+		printf("image: %s \n", images(idx).name );
+		printf("method: %s \n", method );
+
+
+		printf("2\n");
+		thr = graythresh(img,method); %calculate the threshold of the image
+		printf("thr: %f \n", thr );
+
+		printf("3\n");
+		bwImage = im2bw(img,thr); %apply the threshold value
+		
+		printf("4\n");
+		imwrite(bwImage,[outputPath method '/' images(idx).name]);
+				
+		printf("5\n");
+		clear bwImage;
+    endfor
+endfor
