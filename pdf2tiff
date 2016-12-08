@@ -1,7 +1,7 @@
 #!/bin/bash
 #convert a multipage pdf into mutiple .tiffs (one per page)
 
-dpi=$1 #nao usar resolucoes acima de 1000 (valor suportado pelo pc).
+dpi=$1 #do not use values above your hardware resolution
 input_file=$2
 
 #creates "Xdpi	" directory if doesn't exist
@@ -9,4 +9,4 @@ if [ ! -d ''$dpi'dpi' ]; then
   mkdir -p ''$dpi'dpi';
 fi
 
-gs -dNOPAUSE '-r'$dpi'' -sDEVICE=tiff24nc -dBATCH '-sOutputFile='$dpi'dpi/j%03d.tiff' $input_file
+gs -dNOPAUSE '-r'$dpi'' -sDEVICE=tiff24nc -dBATCH '-sOutputFile='$dpi'dpi/a%03d.tiff' $input_file

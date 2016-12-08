@@ -7,17 +7,19 @@ clear all
 clc
 pkg load image
 
-%the following are the thresholding methods that are going to be applied
-methods={'concavity';'intermeans';'intermodes'; 'MaxLikelihood'; 'MaxEntropy';'MinError';'minimum';'moments'};
-
-outputPath = '/home/banshee/Pictures/OCR-images/Database/thresholding/octave-global-thresholdings/';
-imgPath = '/home/banshee/Pictures/OCR-images/Database/300dpi/tiff/';
+%!!!dont forget the '/' in the end of the paths!!!
+outputPath = '/home/banshee/Pictures/ocr-images/Database/thresholding/octave-global-thresholdings/'; 
+imgPath = '/home/banshee/Pictures/ocr-images/Database/300dpi/tiff/';
 imgType = '*.tiff'; % change based on image type
 images  = dir([imgPath imgType]); %images=array containing all the info of .tiffs in the dir
 
+%the following are the thresholding methods that are going to be applied (you need to have one directory for each in
+%your outputPath [with the exactly same name as bellow])
+methods={'concavity';'intermeans';'intermodes'; 'MaxLikelihood'; 'MaxEntropy';'MinError';'minimum';'moments';'Otsu'};
+
 for idx = 1:length(images) %for every image...
 	img = imread([imgPath images(idx).name]);
-	for i = 1:8 %...apply every method
+	for i = 1:length(methods) %...apply every method
 		printf("1\n");
 		method = char(methods(i));
 		printf("image: %s \n", images(idx).name );
