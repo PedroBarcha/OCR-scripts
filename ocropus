@@ -5,12 +5,12 @@ filename=$1
 path=$2
 
 # perform binarization
-ocropus-nlbin $filename -n -Q 4 -o $path
+ocropus-nlbin $filename -n -m 0 -Q 4 -o $path
 
 # perform page layout analysis
 ocropus-gpageseg -n -Q 4 ''$path'/????.bin.png'
 
-# perform text line recognition (on four cores, with a fraktur model)
+# perform text line recognition
 ocropus-rpred -n -Q 4 ''$path'/????/??????.bin.png'
 
 # generate HTML output

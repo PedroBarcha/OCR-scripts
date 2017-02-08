@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#calls leptonica-deskew for every .tiff in the current dir
+#ATT1:you need to have the executable leptonica-deskew in the current dir
+if [ ! -d deskewed ]; then
+  mkdir -p deskewed;
+fi
+
+for i in *.tiff; do
+	./leptonica-deskew $i
+done;
