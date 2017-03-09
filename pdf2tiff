@@ -9,4 +9,4 @@ if [ ! -d ''$dpi'dpi' ]; then
   mkdir -p ''$dpi'dpi';
 fi
 
-gs -dNOPAUSE '-r'$dpi'' -sDEVICE=tiff24nc -dBATCH '-sOutputFile='$dpi'dpi/a%03d.tiff' $input_file
+gs -dNOPAUSE '-r'$dpi'' -sDEVICE=tiff24nc -dBATCH '-sOutputFile='$dpi'dpi/trh%03d.tiff' $input_file
