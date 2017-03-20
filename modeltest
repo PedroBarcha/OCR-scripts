@@ -1,0 +1,3 @@
+#!/bin/bash 
+
+for i in *.pyrnn.gz; do echo "$i" >> modeltest; ocropus-rpred -m "$i" test/*.bin.png; ocropus-errs test/*.gt.txt 2>>modeltest; done
