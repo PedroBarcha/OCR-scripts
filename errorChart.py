@@ -3,16 +3,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
-
 #returns error rates in a float array
 def wrapErr(file):
+	i=0
 	errors= []
 	with open(file) as model:
 		for line in model:
 			if (word_in("err",line)):
 				error=enhanceLine(line)
 				errors.append(error)
+				i+=1
 
+	print i
 	return errors
 
 #return only the value (percentage) of error
@@ -30,8 +32,11 @@ def word_in (word, phrase):
 
 def plotErrors (training_errors_mean, test_errors_mean):
 	iteractions=range(0,30000,500)
+
 	plt.plot(iteractions,test_errors_mean,'b')
 	plt.plot(iteractions,training_errors_mean, 'g')
+
+
 	blue_patch = mpatches.Patch(color='blue', label='Test Set')
 	green_patch = mpatches.Patch(color='green', label='Training Set')
 	plt.legend(handles=[green_patch,blue_patch])
@@ -45,12 +50,13 @@ training_errors=[]
 test_errors_mean=[0]*60
 training_errors_mean=[0]*60
 
-#for eeach dir
-for k in range (1,10):
+#for each dir
+for k in range (1,11):
 	os.chdir(str(k))
 
+	#get error arrays
 	training_errors=(wrapErr("modeltraining"))
-	test_errors=(wrapErr("modeltest"))
+	test_errors=(wrapErr("modelbigtest"))
 
 	#sum the errors of same interaction
 	for i in range (0,60):
@@ -67,7 +73,39 @@ for i in range (0,60):
 	test_errors_mean[i]=test_errors_mean[i]/10
 	training_errors_mean[i]=training_errors_mean[i]/10
 
+#plot chart
 plotErrors(training_errors_mean,test_errors_mean)
+
+#print best models
+min1=100.0
+min2=100.0
+min3=100.0
+min1_index=0
+min2_index=0
+min3_index=0
+for i in range (0,60):
+	if (test_errors_mean[i]<min1):
+		min3=min2
+		min3_index=min2_index
+		min2=min1
+		min2_index=min1_index
+		min1=test_errors_mean[i]
+		min1_index=i
+	elif (test_errors_mean[i]<min2):
+		min3=min2
+		min3_index=min2_index
+		min2=test_errors_mean[i]
+		min2_index=i
+
+	elif (test_errors_mean[i]<min3):
+		min3=test_errors_mean[i]
+		min3_index=i
+
+print ("erro inicial medio: " + str(test_errors_mean[0]))
+print ("test global minimum1: " + str(min1) + ", with " + str((min1_index+1)*500) + "interactions")
+print ("test global minimum2: " + str(min2) + ", with " + str((min2_index+1)*500) + "interactions")
+print ("test global minimum3: " + str(min3) + ", with "  + str((min3_index+1)*500) + "interactions")
+
 
 
 
