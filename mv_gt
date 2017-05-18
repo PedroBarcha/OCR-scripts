@@ -1,0 +1,14 @@
+#!/bin/bash
+#move the groundtruth to the folds' test dir (as I screwed things up and hadn't the gt earlier)
+GT_PATH="/home/banshee/Pictures/ocr-images/Database/training/tesseract/books/";
+
+for i in *; do
+	echo $i;
+	cd $i;
+	cd "test";
+	for j in *.tiff; do
+		cp "$GT_PATH"*/"${j%.tiff}".gt.txt groundtruth;
+	done;
+	cd "..";
+	cd "..";
+done;

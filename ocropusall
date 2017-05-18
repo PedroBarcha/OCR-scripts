@@ -7,5 +7,5 @@ if [ ! -d ocropus ]; then
 fi
 
 for i in *.tiff; do
-	ocropus $i 'ocropus/'${i%.tiff}'.ocropus' #calls ocropus (takes .tiff out from output's name)
+	ocropus $i 'ocropus/'${i%.tiff}'.ocropus'; #calls ocropus (takes .tiff out from output's name)
 done;

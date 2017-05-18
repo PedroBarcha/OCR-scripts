@@ -1,0 +1,2 @@
+The images were deskewd with leptonica method and the passed to ocropus and tesseract.
+In order to make it work, you need to put in the dir containing the images set the executable leptonica-deskew file (its in C files dir). Than, you need to run deskewall and that's it.

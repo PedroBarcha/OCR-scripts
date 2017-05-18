@@ -1,3 +1,10 @@
 #!/bin/bash 
+#apply OCR to the training set with each model generated from training, in order to check the training evolution
 
-for i in *.pyrnn.gz; do echo "$i" >> modeltraining; ocropus-rpred -m "$i" training/*.bin.png; ocropus-errs training/*.gt.txt 2>>modeltraining; done
+fold=$1
+
+for i in *.pyrnn.gz;
+	do echo "$i" >> modeltraining;
+	ocropus-rpred -Q 4 -m "$i" ~/Pictures/ocr-images/Database/training/ocropus/k-fold/$fold/sets/training/*.bin.png; 
+	ocropus-errs ~/Pictures/ocr-images/Database/training/ocropus/k-fold/$fold/sets/training/*.gt.txt 2>>modeltraining; 
+done;

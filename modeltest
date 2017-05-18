@@ -1,3 +1,10 @@
 #!/bin/bash 
+#apply OCR to the test set with each model generated from training, in order to check which are the best models
 
-for i in *.pyrnn.gz; do echo "$i" >> modeltest; ocropus-rpred -m "$i" test/*.bin.png; ocropus-errs test/*.gt.txt 2>>modeltest; done
+fold=$1
+
+for i in *.pyrnn.gz;
+	do echo "$i" >> modeltest;
+	ocropus-rpred -Q 4 -m "$i" ~/Pictures/ocr-images/Database/training/ocropus/k-fold/$fold/sets/test/*.bin.png;
+	ocropus-errs ~/Pictures/ocr-images/Database/training/ocropus/k-fold/$fold/sets/test/*.gt.txt 2>>modeltest; 
+done;
