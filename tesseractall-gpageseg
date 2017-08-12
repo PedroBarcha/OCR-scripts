@@ -1,0 +1,13 @@
+#!/bin/bash
+#apply tesseract to every line produced by gpagedseg
+#this script is called from gpageseg+tesseract
+
+path=$1
+
+cd $path/0001
+
+for i in *.png; do
+	tesseract $i "${i%.bin.png}" #calls tesseract (takes .tiff out from output's name)
+done;
+
+cd ../../..

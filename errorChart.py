@@ -112,9 +112,3 @@ print ("test erro inicial medio: " + str(test_errors_mean[0]))
 print ("test global minimum1: " + str(min1) + ", with " + str((min1_index+1)*500) + "interactions")
 print ("test global minimum2: " + str(min2) + ", with " + str((min2_index+1)*500) + "interactions")
 print ("test global minimum3: " + str(min3) + ", with "  + str((min3_index+1)*500) + "interactions")
-
-
-
-
-
-

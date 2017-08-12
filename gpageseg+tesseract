@@ -1,0 +1,21 @@
+#!/bin/bash
+#preprocessing + pagesegmentation from ocropus
+#OCR from tesseract
+#can be called from ocropusall script
+
+filename=$1
+path=$2
+#model=$3
+
+# perform binarization
+ocropus-nlbin $filename -n -Q 4 -o $path
+
+# perform page layout analysis
+#ocropus-gpageseg -n -Q 4 --threshold 0.45 "$path/????.bin.png"
+ocropus-gpageseg -n -Q 4 "$path/????.bin.png"
+
+# perform text line recognition
+tesseractall-gpageseg $path
+
+# generate HTML output
+ocropus-hocr "$path/????.bin.png" -o $path.html

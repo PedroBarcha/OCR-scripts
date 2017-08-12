@@ -1,7 +1,6 @@
 #!/bin/bash
 #apply all ocropus' tools on the file
 
-
 filename=$1
 path=$2
 #model=$3
@@ -14,7 +13,7 @@ ocropus-gpageseg -n -Q 4 "$path/????.bin.png"
 
 # perform text line recognition
 #ocropus-rpred -n -m $model -Q 4 "$path/????/??????.bin.png"
-ocropus-rpred -n -Q 4 -m *.pyrnn.gz "$path/????/??????.bin.png"
+ocropus-rpred -n -Q 4 "$path/????/??????.bin.png"
 
 # generate HTML output
 ocropus-hocr "$path/????.bin.png" -o $path.html
